@@ -26,7 +26,9 @@ public class DAO {
 	public void adiciona(Tarefas tarefa){
 		String sql = "INSERT into Tarefas"+"(descricao) values(?)";
 		PreparedStatement stmt;
+		System.out.println("fase 1");
 		try {
+			System.out.println("fase 2");
 			stmt = (PreparedStatement) connection.prepareStatement(sql);
 			stmt.setString(1, tarefa.getDescricao());
 			stmt.execute();
@@ -62,6 +64,32 @@ public class DAO {
 
 		return tarefas;
 	}
+	public void update(Tarefas tarefa){
+		String sql = "UPDATE Tarefas SET" + "descricao=? WHERE id=?";
+		PreparedStatement stmt;
+		try {
+			stmt = (PreparedStatement) connection.prepareStatement(sql);
+			stmt.setString(1, tarefa.getDescricao());
+			stmt.setInt(2, tarefa.getId());
+			stmt.execute();
+			stmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
+	public void remove(int Id){
+		PreparedStatement stmt;
+		try {
+			stmt = (PreparedStatement) connection.prepareStatement("DELETE FROM Tarefas WHERE Id=?");
+			stmt.setLong(1, Id);
+			stmt.execute();
+			stmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 }

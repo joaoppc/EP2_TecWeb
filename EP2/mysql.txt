@@ -1,0 +1,3 @@
+CREATE DATABASE Tarefas;
+USE Tarefas;
+CREATE TABLE Tarefas(Id int primary key auto_increment, descricao varchar(140));
